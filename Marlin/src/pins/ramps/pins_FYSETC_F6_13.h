@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,9 +20,9 @@
  *
  */
 
-//
-// FYSETC F6 1.3 (and 1.4) pin assignments
-//
+ //
+ // FYSETC F6 1.3 (and 1.4) pin assignments
+ //
 
 #ifndef __AVR_ATmega2560__
   #error "Oops!  Make sure you have 'FYSETC_F6' selected from the 'Tools -> Boards' menu."
@@ -112,6 +112,18 @@
 #endif
 
 
+/* DIAG
+ * DIAG is not directly connected to the MCU. Please close
+ * the jumper next to the limit switch socket when using it.
+ */
+#define X_TMC2130_DIAG     -1
+#define Y_TMC2130_DIAG     -1
+#define Z_TMC2130_DIAG     -1
+#define E0_TMC2130_DIAG    -1
+#define E1_TMC2130_DIAG    -1
+#define E2_TMC2130_DIAG    -1
+
+
 #if HAS_TMC_UART
   /**
    * TMC2208/TMC2209 stepper drivers
@@ -161,13 +173,13 @@
 //
 // Temperature Sensors
 //
-#define TEMP_0_PIN                            12  // Analog Input
-#define TEMP_1_PIN                            13  // Analog Input
-#define TEMP_2_PIN                            14  // Analog Input
-#define TEMP_BED_PIN                          15  // Analog Input
+#define TEMP_0_PIN         12   // Analog Input
+#define TEMP_1_PIN         13   // Analog Input
+#define TEMP_2_PIN         14   // Analog Input
+#define TEMP_BED_PIN       15   // Analog Input
 
 #ifndef FILWIDTH_PIN
-  #define FILWIDTH_PIN                         10  // Analog Input on X+ endstop
+  #define FILWIDTH_PIN                         9  // Analog Input on X+ endstop
 #endif
 
 //
@@ -178,20 +190,36 @@
 #define HEATER_2_PIN                           7
 #define HEATER_BED_PIN                         8
 
-#define FAN_PIN                               44
-#define FAN1_PIN                              45
-#define FAN2_PIN                              46
+#define FAN_PIN            44
+#define FAN1_PIN           45
+#define FAN2_PIN           46
 
 //
 // Misc. Functions
 //
-#define SDSS                                  53
-#define LED_PIN                               13
-#define KILL_PIN                              41
+#define SDSS               53
+#define LED_PIN            13
+#define KILL_PIN            41
+#define SD_DETECT_PIN       49
 
-#ifndef PS_ON_PIN
-  #define PS_ON_PIN                   SERVO1_PIN
+#if ENABLED(RGB_LED) || ENABLED(RGBW_LED)
+  #define RGB_LED_R_PIN    3
+  #define RGB_LED_G_PIN    4
+  #define RGB_LED_B_PIN    9
+  #define RGB_LED_W_PIN    -1
 #endif
+
+#ifndef FILWIDTH_PIN
+  #define FILWIDTH_PIN      10   // Analog Input on endstop X+
+#endif
+
+
+// define digital pin 11 for the PS_ON control. Use the digital input 11 on the servos connector
+#ifndef PS_ON_PIN
+  #define PS_ON_PIN         SERVO1_PIN
+#endif
+
+
 
 /**
  *               -----                                             -----
@@ -204,62 +232,20 @@
  *               EXP2                                              EXP1
  */
 
-//
-// LCDs and Controllers
-//
-#define BEEPER_PIN                            37
-#define SD_DETECT_PIN                         49
+//////////////////////////
+// LCDs and Controllers //
+//////////////////////////
+#define LCD_PINS_RS         27
+#define LCD_PINS_ENABLE     29
+#define LCD_PINS_D4         25
+#define LCD_PINS_D5         25
+#define LCD_PINS_D6         27
+#define LCD_PINS_D7         29
+#define BEEPER_PIN          37
+#define BTN_EN1             23
+#define BTN_EN2             17
+#define BTN_ENC             35
 
-#if ENABLED(FYSETC_MINI_12864)
-  //
-  // See https://wiki.fysetc.com/Mini12864_Panel/?fbclid=IwAR1FyjuNdVOOy9_xzky3qqo_WeM5h-4gpRnnWhQr_O1Ef3h0AFnFXmCehK8
-  //
-  #define DOGLCD_A0                           16
-  #define DOGLCD_CS                           17
-
-  #if ENABLED(FYSETC_GENERIC_12864_1_1)
-    #define LCD_BACKLIGHT_PIN                 27
-  #endif
-
-  #define KILL_PIN                            41
-  #define LCD_RESET_PIN                       23  // Must be high or open for LCD to operate normally.
-                                // Seems to work best if left open.
-
-  #if EITHER(FYSETC_MINI_12864_1_2, FYSETC_MINI_12864_2_0)
-    #ifndef RGB_LED_R_PIN
-      #define RGB_LED_R_PIN                   25
-    #endif
-    #ifndef RGB_LED_G_PIN
-      #define RGB_LED_G_PIN                   27
-    #endif
-    #ifndef RGB_LED_B_PIN
-      #define RGB_LED_B_PIN                   29
-    #endif
-  #elif ENABLED(FYSETC_MINI_12864_2_1)
-    #define NEOPIXEL_PIN                      25
-  #endif
-
-#elif HAS_GRAPHICAL_LCD
-
-  #define LCD_PINS_RS                         16
-  #define LCD_PINS_ENABLE                     17
-  #define LCD_PINS_D4                         23
-  #define LCD_PINS_D5                         25
-  #define LCD_PINS_D6                         27
-  #define LCD_PINS_D7                         29
-
-  #if ENABLED(MKS_MINI_12864)
-    #define DOGLCD_CS                         25
-    #define DOGLCD_A0                         27
-  #endif
-
-#endif
-
-#if ENABLED(NEWPANEL)
-  #define BTN_EN1                             31
-  #define BTN_EN2                             33
-  #define BTN_ENC                             35
-#endif
 
 #ifndef RGB_LED_R_PIN
   #define RGB_LED_R_PIN                        3

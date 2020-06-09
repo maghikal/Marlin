@@ -491,9 +491,9 @@
   //#define DEFAULT_Kd 76.55
 
   // v6 starting values. Autotune your specific printer if these don't work.
-  #define DEFAULT_Kp 26.26
-  #define DEFAULT_Ki 2.37
-  #define DEFAULT_Kd 72.61
+  #define DEFAULT_Kp 23.84
+  #define DEFAULT_Ki 1.90
+  #define DEFAULT_Kd 74.69
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2

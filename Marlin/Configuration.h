@@ -491,9 +491,9 @@
   //#define DEFAULT_Kd 76.55
 
   // v6 starting values. Autotune your specific printer if these don't work.
-  #define DEFAULT_Kp 28.11
-  #define DEFAULT_Ki 2.54
-  #define DEFAULT_Kd 77.71
+  #define DEFAULT_Kp 26.26
+  #define DEFAULT_Ki 2.37
+  #define DEFAULT_Kd 72.61
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -558,9 +558,9 @@
   //#define DEFAULT_bedKd 1675.16
 
   //Ender 3
-  #define DEFAULT_bedKp 558.37 // PID settings with thermal insulation under bed.
-  #define DEFAULT_bedKi 109.94 // PID settings with thermal insulation under bed.
-  #define DEFAULT_bedKd 708.99 // PID settings with thermal insulation under bed.
+  #define DEFAULT_bedKp 99.63 // PID settings with thermal insulation under bed.
+  #define DEFAULT_bedKi 19.62 // PID settings with thermal insulation under bed.
+  #define DEFAULT_bedKd 337.35 // PID settings with thermal insulation under bed.
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -796,15 +796,15 @@
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 10.0
-  #define DEFAULT_YJERK 10.0
-  #define DEFAULT_ZJERK  0.3
+  #define DEFAULT_XJERK 15.0
+  #define DEFAULT_YJERK 15.0
+  #define DEFAULT_ZJERK  0.4
 
   //#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
 
   //#define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
-    #define MAX_JERK_EDIT_VALUES { 20, 20, 0.6, 10 } // ...or, set your own edit limits
+    #define MAX_JERK_EDIT_VALUES { 15, 15, 0.4, 10 } // ...or, set your own edit limits
   #endif
 #endif
 
@@ -818,7 +818,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.010 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.080 // (mm) Distance from real junction edge
 #endif
 
 /**
